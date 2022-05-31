@@ -1,0 +1,6 @@
+<launch>
+    <arg name="map_name" default="outdoor.bt" />
+    <arg name="path" default="$(find rotor_nav)/map/$(arg map_name)" />
+    <!-- <arg name="path" default="/home/yzc/rotor_simulator_ws/src/rotors_simulator/rotor_nav/map/outdoor.bt" /> -->
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_talker" output="screen" args="$(arg path)" />
+</launch>
