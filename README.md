@@ -2,16 +2,22 @@
 
 启动仿真器
 roslaunch rotors_gazebo mav_hovering_example_with_vi_sensor.launch  mav_name:=firefly world_name:=single_box
+
 加载地图
 roslaunch path_planning load_octomap.launch map_name:=single_box.bt
+
 打开rviz
 roslaunch path_planning rviz.launch
+
 路径规划
 rosrun path_planning path_planning_node
+
 轨迹规划并执行
 rosrun path_planning traj_gen
+
 手动建图
 roslaunch octomap_server octomap_tracking_server.launch
+
 Gazebo仅加载world(用于生成octomap地图)
 roslaunch path_planning visualize_world.launch world_name:=outdoor
 
@@ -25,10 +31,13 @@ https://tangrams.github.io/heightmapper 可用，需将图片从rgba处理为gra
 
 
 保存octomap地图(2种方法)
+
 1.保存压缩的二进制存储格式地图：
 rosrun octomap_server octomap_saver mapfile.bt
+
 2.保存一个完整的概率八叉树地图：
 rosrun octomap_server octomap_saver -f mapfile.ot
+
 可视化octomap地图：
 octovis xxx.ot[bt]
 
@@ -37,6 +46,7 @@ octovis xxx.ot[bt]
   <octomapPubTopic>world/octomap</octomapPubTopic>
   <octomapServiceName>world/get_octomap</octomapServiceName>
 </plugin>
+
 运行以下命令直接得到octomap地图：
 rosservice call /world/get_octomap '{bounding_box_origin: {x: 0, y: 0, z: 1.75}, bounding_box_lengths: {x: 20.8, y: 20.8, z: 4}, leaf_size: 0.1, filename: /home/yzc/map.bt}'
 rosservice call /world/get_octomap '{bounding_box_origin: {x: 0, y: 0, z: 1.75}, bounding_box_lengths: {x: 20.8, y: 20.8, z: 4}, leaf_size: 0.1, filename: /home/yzc/rotors_simulator_ws/src/path_planning/map/single_box.bt}'
